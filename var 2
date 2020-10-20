@@ -1,0 +1,272 @@
+#include<iostream>
+#include <string>
+using namespace std;
+class Sport_Transport {
+protected:
+	string suspension;
+	string engine;
+public:
+	Sport_Transport() {};
+	Sport_Transport(string sus,string eng) {
+		sus = suspension;
+		eng = engine;
+	}
+	~Sport_Transport() {};
+	void set_susp(){
+		int choice;
+		cout << "Choose suspension which you prefer:1-low,2-medium,3-high" << endl;
+		do{
+			if (cin.fail())
+			{
+				cin.clear();
+				cin.ignore();
+			}
+			cin >> choice;
+		} while (!choice||choice<1||choice>3);
+		if (choice == 1)
+		{
+			suspension = "low";
+		}
+		if (choice == 2)
+		{
+			suspension = "medium";
+		}
+		if (choice == 3)
+		{
+			suspension = "high";
+		}
+	}
+	void set_engine() {
+		int vyb;
+		cout << "Which engine you want?:1-patrol,2-electric" << endl;
+		do {
+			if (cin.fail())
+			{
+				cin.clear();
+				cin.ignore();
+			}
+			cin >> vyb;
+		} while (!vyb || vyb < 1 || vyb>2);
+		if (vyb == 1)
+		{
+			engine = "patrol";
+		}
+		if (vyb == 2)
+		{
+			engine = "electric";
+		}
+	}
+};
+class track :public virtual Sport_Transport {
+protected:
+	string tires;
+public:
+	track() {};
+	track(string sus, string tir, string eng) :Sport_Transport(sus, eng) { tir = tires; }
+	~track() {};
+	void set_tire() {
+		int vyb;
+		cout << "Choose tires which you want:1-soft,2-medium,3-hard" << endl;
+		do {
+			if (cin.fail())
+			{
+				cin.clear();
+				cin.ignore();
+			}
+			cin >> vyb;
+		} while (!vyb || vyb < 1 || vyb>3);
+		if (vyb == 1)
+		{
+			tires = "soft";
+		}
+		if (vyb == 2)
+		{
+			tires = "medium";
+		}
+		if (vyb == 3)
+		{
+			tires = "hard";
+		}
+	}
+};
+class offroad :public virtual Sport_Transport {
+protected:
+	string amortization;
+public:
+	offroad() {};
+	offroad(string sus, string amort, string eng) :Sport_Transport(sus, eng) { amort = amortization; }
+	~offroad() {};
+	void set_amort() {
+		int vyb;
+		cout << "Choose type of your vehicles amortization:1-oil,2-gas" << endl;
+		do {
+			if (cin.fail())
+			{
+				cin.clear();
+				cin.ignore();
+			}
+			cin >> vyb;
+		} while (!vyb || vyb < 1 || vyb>2);
+		if (vyb == 1)
+		{
+			amortization = "oil";
+		}
+		if (vyb == 2)
+		{
+			amortization = "gas";
+		}
+	}
+};
+class LeMan_car :public track {
+protected:
+	string downforce;
+public:
+	LeMan_car() {};
+	LeMan_car(string sus, string tir, string eng,string down) :track(sus, eng,tir) { down = downforce; }
+	~LeMan_car() {};
+	void set_downforce() {
+		int vyb;
+		cout << "We can offer you 3 types of equipement,which can provide you downforce you need.Choose onr,please :1-300N,2-375N,3-450N" << endl;
+		do {
+			if (cin.fail())
+			{
+				cin.clear();
+				cin.ignore();
+			}
+			cin >> vyb;
+		} while (!vyb || vyb < 1 || vyb>3);
+		if (vyb == 1)
+		{
+			downforce = "complect 1";
+		}
+		if (vyb == 2)
+		{
+			downforce = "complect 2";
+		}
+		if (vyb == 3)
+		{
+			downforce = "complect 3";
+		}
+	}
+};
+class buggy :public offroad {
+protected:
+	int protection=0;
+public:
+	buggy() {};
+	buggy(string sus, string amort, string eng, int prot) :offroad(sus, eng, amort) { prot = protection; }
+	~buggy() {};
+	void set_protection() {
+		cout << "Choose one of three levels of protection" << endl;
+		do {
+			if (cin.fail())
+			{
+				cin.clear();
+				cin.ignore();
+			}
+			cin >> protection;
+		} while (!protection || protection < 1 || protection>3);
+	}
+};
+class race_and_conclusion :public LeMan_car, public buggy {
+protected:
+	int cost=250000;
+	int num=0;
+public:
+	race_and_conclusion() {};
+	race_and_conclusion(string sus, string amort, string eng, string tir, string down, int prot, int cst, int ch) :LeMan_car(sus, eng, tir, down), buggy(sus, eng, amort, prot) { cst = cost; ch = num; }
+	~race_and_conclusion() {};
+	void how_many() {
+		cout << "How many cars you want to order?" << endl;
+		do {
+			if (cin.fail())
+			{
+				cin.clear();
+				cin.ignore();
+			}
+			cin >> num;
+		} while (!num);
+	}
+	void concl() {
+		if (suspension == "low")
+		{
+			cost += 2500;
+		}
+		if (suspension == "medium")
+		{
+			cost += 2200;
+		}
+		if (suspension == "high")
+		{
+			cost += 3000;
+		}
+		if (engine == "patrol")
+		{
+			cost += 4500;
+		}
+		if (engine == "electric")
+		{
+			cost += 6000;
+		}
+		if (tires == "soft")
+		{
+			cost += 1500;
+		}
+		if (tires == "medium")
+		{
+			cost += 1450;
+		}
+		if (tires == "hard")
+		{
+			cost += 1550;
+		}
+		if (amortization == "oil")
+		{
+			cost += 1000;
+		}
+		if (amortization == "gas")
+		{
+			cost += 1200;
+		}
+		if (downforce == "complect 1")
+		{
+			cost += 1500;
+		}
+		if (downforce == "complect 2")
+		{
+			cost += 1750;
+		}
+		if (downforce == "complect 3")
+		{
+			cost += 2000;
+		}
+		if (protection == 1)
+		{
+			cost += 1100;
+		}
+		if (protection == 2)
+		{
+			cost += 1200;
+		}
+		if (protection == 3)
+		{
+			cost += 1300;
+		}
+		cost = cost * num;
+		cout << "So,you ordered "<<num <<" pairs of cars,which has "<< suspension <<" suspension and "<< engine <<" engines,among them LeMan cars with "<< tires <<" tires and "<< downforce <<" of downpower equipement,and buggies with "<< amortization <<" amortization and "<< protection <<" level of protection "<<endl;
+		cout << "Your total cost is:" << cost <<"$"<< endl;
+	}
+};
+int main()
+{
+	race_and_conclusion order;
+	order.set_susp();
+	order.set_engine();
+	order.set_tire();
+	order.set_amort();
+	order.set_downforce();
+	order.set_protection();
+	order.how_many();
+	order.concl();
+	return 0;
+}
