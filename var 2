@@ -126,7 +126,7 @@ public:
 	~LeMan_car() {};
 	void set_downforce() {
 		int vyb;
-		cout << "We can offer you 3 types of equipement,which can provide you downforce you need.Choose onr,please :1-300N,2-375N,3-450N" << endl;
+		cout << "We can offer you 3 types of equipement,which can provide you downforce you need.Choose one,please :1-300N,2-375N,3-450N" << endl;
 		do {
 			if (cin.fail())
 			{
@@ -253,13 +253,13 @@ public:
 			cost += 1300;
 		}
 		cost = cost * num;
-		cout << "So,you ordered "<<num <<" pairs of cars,which has "<< suspension <<" suspension and "<< engine <<" engines,among them LeMan cars with "<< tires <<" tires and "<< downforce <<" of downpower equipement,and buggies with "<< amortization <<" amortization and "<< protection <<" level of protection "<<endl;
+		cout << "So,you ordered "<<num <<" pairs of cars,which has "<< suspension <<" suspension and "<< engine <<" engines,among them LeMan cars with "<< tires <<" tires and "<< downforce <<" of downforce equipement,and buggies with "<< amortization <<" amortization and "<< protection <<" level of protection "<<endl;
 		cout << "Your total cost is:" << cost <<"$"<< endl;
 	}
 };
 int main()
 {
-	race_and_conclusion order;
+	race_and_conclusion order("low", "patrol", "soft", "oil", "complect 1", 1, 20000, 5);
 	order.set_susp();
 	order.set_engine();
 	order.set_tire();
